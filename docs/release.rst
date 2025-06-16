@@ -4,6 +4,17 @@
    =======
    
 
+Release v0.5.3 (16/06/2025)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* cs: change value of ``min_nonzero_num`` from single int to a tuple of int,
+  default (1, 1, 3), 
+  which is the minimum number of cells that have non-zeros in one feature,
+  for alleles 'A', 'B', and 'U', respectively.
+* cs: update cell-wise QC parameters, i.e., ``qc_min_features`` from 0.01 
+  (fraction) to 100 (count); ``qc_cw_low_quantile`` from 0.005 to 0.0; and
+  ``qc_cw_up_quantile`` from 0.995 to 1.0.
+
+
 
 Release v0.5.2 (03/06/2025)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
