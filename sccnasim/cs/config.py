@@ -52,7 +52,7 @@ class Config:
         # def_kwargs_fit_rd : dict
         #   Default settings passing to `kwargs_fit_rd`.
         self.def_kwargs_fit_rd = {
-            "min_nonzero_num": 1,
+            "min_nonzero_num": (1, 1, 3),       # for A, B, U.
             "max_iter": 1000,
             "pval_cutoff": 0.05
         }

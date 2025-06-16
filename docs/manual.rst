@@ -59,6 +59,7 @@ Full Parameters
         overlap_features_how = "raw",
         size_factor = "libsize",
         marginal = "auto",
+        libsize_ratio = 1.0,
         loss_allele_freq = 0.01,
         kwargs_fit_sf = None,
         kwargs_fit_rd = None,
@@ -185,6 +186,9 @@ marginal : {"auto", "poi", "nb", "zinb"}
     - "poi" (Poisson).
     - "nb" (Negative Binomial).
     - "zinb" (Zero-Inflated Negative Binomial).
+    
+libsize_ratio : float, default 1.0
+    Ratio of library size of simulated cells compared to seed cells.
 
 loss_allele_freq : float, default 0.01
     The frequency of the lost allele, to mimic real error rate, i.e.,
@@ -204,8 +208,9 @@ kwargs_fit_rd : dict or None, default None
     :func:`~.marginal.fit_RD_wrapper` for fitting read depth.
     The available arguments are:
     
-    - min_nonzero_num : int, default 1
-        The minimum number of cells that have non-zeros for one feature.
+    - min_nonzero_num : tuple of int, default (1, 1, 3)
+        The minimum number of cells that have non-zeros in one feature,
+        for alleles 'A', 'B', and 'U', respectively.
         If smaller than the cutoff, then the feature will not be fitted
         (i.e., its mean will be directly treated as 0).
     - max_iter : int, default 1000

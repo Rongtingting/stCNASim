@@ -146,6 +146,10 @@ def cs_core(conf):
             loss_allele_freq = conf.loss_allele_freq
         )
         
+        kwargs_fit_rd = conf.kwargs_fit_rd.copy()
+        if "min_nonzero_num" in kwargs_fit_rd:
+            kwargs_fit_rd["min_nonzero_num"] = kwargs_fit_rd["min_nonzero_num"][idx]
+        
         dir_ale = dir_list[idx]
         args = dict(
             count_fn = count_fn_list[idx],
@@ -159,7 +163,7 @@ def cs_core(conf):
             size_factors_train = pp_res["size_factors_train"],
             size_factors_simu = pp_res["size_factors_simu"],
             marginal = conf.marginal, 
-            kwargs_fit_rd = conf.kwargs_fit_rd,
+            kwargs_fit_rd = kwargs_fit_rd,
             libsize_ratio = conf.libsize_ratio,
             ncores = conf.ncores, 
             verbose = conf.verbose
@@ -380,8 +384,9 @@ def cs_wrapper(
         The additional kwargs passed to function 
         :func:`~marginal.fit_RD_wrapper` for fitting read depth.
         The available arguments are:
-        - min_nonzero_num : int, default 1
-            The minimum number of cells that have non-zeros for one feature.
+        - min_nonzero_num : tuple of int, default (1, 1, 3)
+            The minimum number of cells that have non-zeros in one feature,
+            for alleles 'A', 'B', and 'U', respectively.
             If smaller than the cutoff, then the feature will not be fitted
             (i.e., its mean will be directly treated as 0).
         - max_iter : int, default 1000

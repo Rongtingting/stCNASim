@@ -81,6 +81,8 @@ def cs_init(conf):
         if k in conf.kwargs_fit_rd:
             kwargs_fit_rd[k] = conf.kwargs_fit_rd[k]
     conf.kwargs_fit_rd = kwargs_fit_rd
+    if "min_nonzero_num" in conf.kwargs_fit_rd:
+        assert len(conf.kwargs_fit_rd["min_nonzero_num"]) == len(conf.alleles)
     #info("complete kwargs_fit_rd is: %s." % str(conf.kwargs_fit_rd))
     
     

@@ -159,8 +159,9 @@ def main_wrapper(
         The additional kwargs passed to function 
         :func:`~.marginal.fit_RD_wrapper` for fitting read depth.
         The available arguments are:
-        - min_nonzero_num : int, default 3
-            The minimum number of cells that have non-zeros for one feature.
+        - min_nonzero_num : tuple of int, default (1, 1, 3)
+            The minimum number of cells that have non-zeros in one feature,
+            for alleles 'A', 'B', and 'U', respectively.
             If smaller than the cutoff, then the feature will not be fitted
             (i.e., its mean will be directly treated as 0).
         - max_iter : int, default 1000
