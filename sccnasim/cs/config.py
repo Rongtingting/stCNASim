@@ -69,15 +69,15 @@ class Config:
         # qc_min_features : int or float
         #   Minimum expressed features in one cell.
         #   If ``float``, it is the fraction of all input features.
-        self.qc_min_features = 0.01
+        self.qc_min_features = 100
         
         # qc_cw_low_quantile : float
         #   The lower quantile of cell-wise statistics.
-        self.qc_cw_low_quantile = 0.005
+        self.qc_cw_low_quantile = 0.0
         
         # qc_cw_up_quantile : float
         #   The upper quantile of cell-wise statistics.
-        self.qc_cw_up_quantile = 0.995
+        self.qc_cw_up_quantile = 1.0
         
 
     def show(self, fp = None, prefix = ""):
