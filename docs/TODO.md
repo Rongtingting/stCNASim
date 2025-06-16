@@ -25,10 +25,6 @@
   count(RDR)-based CNA simulatioin, to take CNA profile and clone annotation
   files as input.
 
-- Add an option about `total library size` to enable simulation of various
-  read depth.
-  Refer to the `total number of reads` in scDesign2.
-
 
 
 # Discussion
