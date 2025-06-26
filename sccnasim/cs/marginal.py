@@ -876,7 +876,7 @@ def simu_RD(
     cell_type_old = None,
     n_cell_each = None,
     s = None,
-    cn_fold = None,
+    cn_ratio = None,
     total_count_new = None,
     libsize_ratio = 1.0,
     dtype = np.int32,
@@ -915,15 +915,15 @@ def simu_RD(
         Its elements are vectors whose lengths matching elements of 
         `n_cell_each`.
         Set to `None` if do not use it.
-    cn_fold : dict or None, default None
-        The copy number (CN) fold, e.g., 1.0 for copy neutral; >1.0 for copy
-        gain; and <1.0 for copy loss.
-        Its keys are new cell types (str) and values are vectors of CN folds.
+    cn_ratio : dict or None, default None
+        The copy ratio, e.g., 1.0 for copy neutral; >1.0 for copy gain;
+        and <1.0 for copy loss.
+        Keys are new cell types (str) and values are vectors of copy ratios.
         For each such vector, length and order should be the same with
         `features`.
         Note that you can specify cell types with copy number alterations only,
-        since all features are assumed have fold 1.0 unless specified.
-        Set to `None` to use fold 1.0 on all features in all cell types.
+        since all features are assumed have ratio 1.0 unless specified.
+        Set to `None` to use ratio 1.0 on all features in all cell types.
     total_count_new : int, list of int or None, default None
         The total read counts to be simulated.
         If a int, it is the total libray size of all simulated cells; 
@@ -947,7 +947,7 @@ def simu_RD(
         It has one column "cell_type" in `.obs` and one column "feature" 
         in `.var`.
     dict
-        The updated `params` incorporating CN-folds, the same length as
+        The updated `params` incorporating copy ratios, the same length as
         `cell_type_new`, while keeping the input `params` unchanged.
     """
     if verbose:
@@ -999,24 +999,24 @@ def simu_RD(
                 assert len(c_s) == n_cell
 
 
-    cn_fold_arr = None        # np.array (2d); cell_type x feature
-    if cn_fold is None:
-        cn_fold_arr = np.array([np.repeat(1.0, p) \
+    cn_ratio_arr = None        # np.array (2d); cell_type x feature
+    if cn_ratio is None:
+        cn_ratio_arr = np.array([np.repeat(1.0, p) \
                             for _ in range(len(cell_type_new))])
     else:
-        assert isinstance(cn_fold, dict)
+        assert isinstance(cn_ratio, dict)
         if verbose:
-            info("CN folds are specified in %d cell types." % len(cn_fold))
+            info("copy ratios are specified in %d cell types." % len(cn_ratio))
 
-        cn_fold_arr = np.array([np.repeat(1.0, p) \
+        cn_ratio_arr = np.array([np.repeat(1.0, p) \
                             for _ in range(n_cell_types)])
-        for c, fold in cn_fold.items():
+        for c, ratio in cn_ratio.items():
             if c not in cell_type_new:
-                error("invalid cell type '%s' in cn_fold." % c)
+                error("invalid cell type '%s' in cn_ratio." % c)
                 raise ValueError
-            assert len(fold) == p
+            assert len(ratio) == p
             idx = cell_type_new.index(c)
-            cn_fold_arr[idx] = np.array(fold)           
+            cn_ratio_arr[idx] = np.array(ratio)           
 
 
     if total_count_new is None:
@@ -1030,7 +1030,7 @@ def simu_RD(
                
 
     # simulation
-    # TODO: consider copy number fold when scaling to total_count_new.
+    # TODO: consider copy ratio when scaling to total_count_new.
     r = None                      # scaling factor
     if total_count_new is None:
         r = np.repeat(libsize_ratio, n_cell_types)
@@ -1050,7 +1050,7 @@ def simu_RD(
     params_new = dict()
     for i, (c_new, c_old) in enumerate(zip(cell_type_new, cell_type_old)):
         par = copy.deepcopy(params[c_old])
-        scaling = r[i] * cn_fold_arr[i][par["params_nz"]["index"]]
+        scaling = r[i] * cn_ratio_arr[i][par["params_nz"]["index"]]
         par["params_nz"]["mu"] *= scaling
 
         par_fn = os.path.join(tmp_dir, "celltype.%s.input.params.pickle" % c_new)
@@ -1076,16 +1076,16 @@ def simu_RD(
                
         params_new[c_new] = copy.deepcopy(par)
                
-    params_fn_new = os.path.join(tmp_dir, "updated.cn_fold.params.pickle")
+    params_fn_new = os.path.join(tmp_dir, "updated.cn_ratio.params.pickle")
     save_params(params_new, params_fn_new)
     
     del params_new
     del params
     del s
-    del cn_fold
-    del cn_fold_arr
+    del cn_ratio
+    del cn_ratio_arr
     gc.collect()
-    params_new = params = s = cn_old = cn_fold_arr = None
+    params_new = params = s = cn_old = cn_ratio_arr = None
     
 
     # simulation in each cell type.

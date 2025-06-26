@@ -78,9 +78,9 @@ The simulator has a precursor named scCNASimulator_, which has been used in
 XClone_ to demonstrate its robustness to detect allele-specific CNAs.
 
 scCNASimulator implements a naive strategy for CNA simulation, which 
-multiplies the UMI/read counts directly by copy number fold to generate the
+multiplies the UMI/read counts directly by copy ratio to generate the
 new counts of CNA features, whereas this new simulator models the counts
-with certain probability distribution and encodes the CN fold in the updated
+with certain probability distribution and encodes the copy ratio in the updated
 distribution parameters before generating new simulated counts.
 
 

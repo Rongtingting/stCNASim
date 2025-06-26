@@ -200,7 +200,7 @@ def cs_cna_core(
     clones,
     cell_types,
     n_cell_each,
-    cn_fold,
+    cn_ratio,
     size_factor,
     size_factors_train,
     size_factors_simu,
@@ -228,13 +228,13 @@ def cs_cna_core(
         The source cell types used by `clones`.
     n_cell_each : list of int
         Number of cells in each of `clones`.
-    cn_fold : dict of {str : numpy.ndarray}
-        Keys are clones, values are feature-specific CN folds of corresponding
-        clone.
-        The copy number (CN) fold, e.g., 1.0 for copy neutral; >1.0 for copy
-        gain; and <1.0 for copy loss.
+    cn_ratio : dict of {str : numpy.ndarray}
+        Keys are clones, values are feature-specific copy ratios of 
+        corresponding clone.
+        The copy ratio, e.g., 1.0 for copy neutral; >1.0 for copy gain;
+        and <1.0 for copy loss.
         Note that you can specify clones with copy number alterations only,
-        since all features are assumed have fold 1.0 unless specified.
+        since all features are assumed have ratio 1.0 unless specified.
     size_factor : str or None, default "libsize"
         The type of size factor.
         Currently, only support "libsize" (library size).
@@ -272,7 +272,7 @@ def cs_cna_core(
     clones = clones.values
     assert len(cell_types) == len(clones)
     assert len(n_cell_each) == len(clones)
-    for clone in cn_fold.keys():
+    for clone in cn_ratio.keys():
         assert clone in clones
 
     if size_factors_simu is not None:
@@ -315,7 +315,7 @@ def cs_cna_core(
         cell_type_old = cell_types,
         n_cell_each = n_cell_each,
         s = size_factors_simu,
-        cn_fold = cn_fold,
+        cn_ratio = cn_ratio,
         total_count_new = None,
         libsize_ratio = libsize_ratio,
         dtype = np.int32,

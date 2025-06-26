@@ -14,7 +14,7 @@ from anndata import ImplicitModificationWarning
 from logging import info, error
 from .config import Config
 from .core import cs_init, cs_pp, cs_cna_core
-from .gcna import calc_cn_fold
+from .gcna import calc_cn_ratio
 from .io import cs_save_adata2mtx, save_params
 from ..xlib.xbarcode import rand_cell_barcodes
 from ..xlib.xdata import load_h5ad, save_h5ad
@@ -138,7 +138,7 @@ def cs_core(conf):
         else:
             raise ValueError
 
-        cn_fold = calc_cn_fold(
+        cn_ratio = calc_cn_ratio(
             cna_profile = profile,
             cna_features = pp_res["cna_fet"],
             p = p,
@@ -158,7 +158,7 @@ def cs_core(conf):
             clones = clone_anno["clone"],
             cell_types = clone_anno["cell_type"],
             n_cell_each = pp_res["n_cell_each"],
-            cn_fold = cn_fold,
+            cn_ratio = cn_ratio,
             size_factor = conf.size_factor,
             size_factors_train = pp_res["size_factors_train"],
             size_factors_simu = pp_res["size_factors_simu"],
