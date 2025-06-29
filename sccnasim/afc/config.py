@@ -43,6 +43,7 @@ class Config:
         self.multi_mapper_how = self.defaults.MULTI_MAPPER_HOW
         self.xf_tag = self.defaults.XF_TAG
         self.gene_tag = self.defaults.GENE_TAG
+        self.no_orphan_post_qc = self.defaults.NO_ORPHAN
         
         # read filtering.
         self.min_mapq = self.defaults.MIN_MAPQ
@@ -106,6 +107,7 @@ class Config:
         s += "%smulti_mapper_how = %s\n" % (prefix, self.multi_mapper_how)
         s += "%sxf_tag = %s\n" % (prefix, str(self.xf_tag))
         s += "%sgene_tag = %s\n" % (prefix, str(self.gene_tag))
+        s += "%sno_orphan_post_qc = %s\n" % (prefix, self.no_orphan_post_qc)
         s += "%s\n" % prefix
 
         # read filtering.

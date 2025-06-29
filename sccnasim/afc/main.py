@@ -176,6 +176,7 @@ def afc_wrapper(
     conf.multi_mapper_how = multi_mapper_how
     conf.xf_tag = xf_tag
     conf.gene_tag = gene_tag
+    conf.no_orphan_post_qc = no_orphan
     
     conf.min_mapq = min_mapq
     conf.min_len = min_len
