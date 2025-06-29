@@ -18,6 +18,7 @@ def check_read(read, reg, conf):
         xf = read.get_tag(conf.xf_tag)
         if xf not in (17, 25):
             return(-102)
+        return(0)
     if conf.gene_tag:
         if not read.has_tag(conf.gene_tag):
             return(-106)
