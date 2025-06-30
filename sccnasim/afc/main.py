@@ -123,8 +123,6 @@ def afc_wrapper(
     xf_tag : str or None, default "xf"
         The extra alignment flags set by tools like CellRanger or SpaceRanger.
         If set, only reads with tag's value 17 or 25 will count.
-        Note that when it is set, all other read filtering in `afc` will not 
-        be performed.
         If `None`, turn this tag off.
     gene_tag : str or None, default "GN"
         The tag for gene name set by tools like CellRanger or SpaceRanger.
