@@ -2,8 +2,8 @@
 ..
    History
    =======
-   
-   
+
+
 Release v0.6.0 (09/07/2025)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This version mainly restructure the ``mcount`` object in ``afc`` module.

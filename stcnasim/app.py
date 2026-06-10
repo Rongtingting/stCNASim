@@ -1,6 +1,6 @@
 # app.py - App info.
 
 
-APP = "sccnasim"
+APP = "stcnasim"
 VERSION = "0.6.0"
 AUTHOR = "Xianjie Huang"

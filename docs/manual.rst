@@ -19,7 +19,7 @@ platform, an example is:
 
 .. code-block:: python
 
-   from sccnasim import main_wrapper
+   from stcnasim import main_wrapper
 
    main_wrapper(
        sam_fn = "{sample}.bam",

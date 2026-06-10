@@ -1,10 +1,10 @@
-scCNASim
+stCNASim
 ========
 
-scCNASim - Haplotype-aware simulation of somatic CNAs from single-cell and spatial transcriptomics
+stCNASim - Haplotype-aware simulation of somatic CNAs from single-cell and spatial transcriptomics
 --------------------------------------------------------------------------------------------------
 
-scCNASim is a python package designed for simulation of allele-specific 
+stCNASim is a python package designed for simulation of allele-specific 
 somatic copy number alterations (CNAs) from single-cell and spatial 
 transcriptomics.
 It mainly takes existing alignment file, phased SNPs, and a clonal CNA profile
@@ -35,17 +35,17 @@ Dependency
 
 .. code-block:: bash
 
-   pip install -U git+https://github.com/hxj5/scCNASim
+   pip install -U git+https://github.com/hxj5/stCNASim
 
 
 Potential Issues
 ~~~~~~~~~~~~~~~~
 If you encounter an error
 ``"configure: error: liblzma development files not found"``
-when installing scCNASim, it is actually an installation issue of pysam.
+when installing stCNASim, it is actually an installation issue of pysam.
 
 You can fix the error easily by installing pysam via conda, if you are
-installing scCNASim in an conda env, i.e., run
+installing stCNASim in an conda env, i.e., run
 
 .. code-block:: bash
 
@@ -53,8 +53,8 @@ installing scCNASim in an conda env, i.e., run
    conda config --add channels conda-forge
    conda install pysam
 
-and then re-install scCNASim.
-See `Issue 3 <https://github.com/hxj5/scCNASim/issues/3>`_ for details.
+and then re-install stCNASim.
+See `Issue 3 <https://github.com/hxj5/stCNASim/issues/3>`_ for details.
 
 
 
@@ -85,6 +85,6 @@ distribution parameters before generating new simulated counts.
 
 
 
-.. _issue: https://github.com/hxj5/scCNASim/issues
+.. _issue: https://github.com/hxj5/stCNASim/issues
 .. _scCNASimulator: https://github.com/hxj5/scCNASimulator
 .. _XClone: https://github.com/single-cell-genetics/XClone

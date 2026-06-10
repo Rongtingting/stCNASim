@@ -12,7 +12,7 @@ here = path.abspath(path.dirname(__file__))
 
 
 # load configures
-exec(open("./sccnasim/app.py").read())
+exec(open("./stcnasim/app.py").read())
 
 
 # Get the long description from the relevant file
@@ -37,19 +37,19 @@ reqs = ["anndata", "intervaltree", "matplotlib", "numpy", "pandas", "pysam",
 
 
 setup(
-    name = "sccnasim",
+    name = "stcnasim",
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
     version = VERSION,
 
-    description = "scCNASim - Haplotype-aware simulation of somatic CNAs from single-cell and spatial transcriptomics",
+    description = "stCNASim - Haplotype-aware simulation of somatic CNAs from single-cell and spatial transcriptomics",
     long_description = long_description,
     long_description_content_type = "text/markdown",
 
     # The project's main homepage.
-    url = "https://github.com/hxj5/scCNASim",
+    url = "https://github.com/hxj5/stCNASim",
 
     # Author details
     author = 'Xianjie Huang',
@@ -67,7 +67,7 @@ setup(
 
     #entry_points={
     #    'console_scripts': [
-    #        'sccnasim = sccnasim.main:main'
+    #        'stcnasim = stcnasim.main:main'
     #    ],
     #},
 
@@ -82,7 +82,7 @@ setup(
     
     install_requires = reqs,
 
-    py_modules = ['sccnasim']
+    py_modules = ['stcnasim']
 
     # buid the distribution: python setup.py sdist
     # upload to pypi: twine upload dist/...
